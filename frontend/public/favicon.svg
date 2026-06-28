@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Background rounded square -->
+  <rect width="64" height="64" rx="14" fill="#0F172A"/>
+
+  <!-- Pulse/EKG line with upward trend - glowing blue to purple -->
+  <defs>
+    <linearGradient id="pulseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bgGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Subtle radial glow in the background -->
+  <ellipse cx="32" cy="36" rx="22" ry="16" fill="url(#bgGlow)"/>
+
+  <!-- EKG / pulse line - heart beat trending upward -->
+  <polyline
+    points="8,40 16,40 20,28 24,44 28,22 32,44 36,30 40,36 44,26 50,38 56,38"
+    stroke="url(#pulseGrad)"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+    filter="url(#glow)"
+  />
+
+  <!-- AI node dot - bright white circle at the peak -->
+  <circle cx="28" cy="22" r="3.5" fill="white" filter="url(#glow)"/>
+
+  <!-- Subtle trend arrow tip at the end -->
+  <circle cx="56" cy="38" r="2.5" fill="#7C3AED" filter="url(#glow)"/>
+</svg>
