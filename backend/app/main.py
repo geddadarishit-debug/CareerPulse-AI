@@ -15,14 +15,24 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="CareerPulse AI Production Backend")
 
+import os
+
+# Parse allowed origins from environment variable or fallback to defaults
+cors_origins_env = os.getenv("BACKEND_CORS_ORIGINS", "")
+allowed_origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://career-pulse-ai-tau.vercel.app",
+]
+if cors_origins_env:
+    # Allow comma-separated origins from environment variables
+    allowed_origins.extend([origin.strip() for origin in cors_origins_env.split(",") if origin.strip()])
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
